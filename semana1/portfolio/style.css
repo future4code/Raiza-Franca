@@ -160,3 +160,9 @@ button {
     text-decoration: none;
     color: gray;
 }
+
+.end {
+    text-decoration: none;
+    color: gray;
+    margin-left: 155px;
+}
