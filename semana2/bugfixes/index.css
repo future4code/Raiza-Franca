@@ -8,6 +8,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
+    text-align: center;
 }
 
 h2 {
@@ -99,6 +100,10 @@ button:hover {
     font-size: 60px;
 }
 
+ol {
+    list-style: decimal;
+}
+
 
 /**
   *
@@ -112,7 +117,7 @@ div:last-child {
 }
 
 table {
-    width: 60%;
+    width: 100%;
     text-align: center;
 }
 
@@ -154,5 +159,3 @@ td button {
 img {
     width: 80px;
 }
-
-tbody {}
