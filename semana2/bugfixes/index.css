@@ -109,6 +109,10 @@ table {
     text-align: center;
 }
 
+input {
+    border-bottom: 3px solid;
+}
+
 td button {
     background-color: #fadf63;
     width: 150px;
