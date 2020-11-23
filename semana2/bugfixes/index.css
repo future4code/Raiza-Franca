@@ -59,6 +59,10 @@ div img {
     height: 15px;
 }
 
+button:hover {
+    background-color: #c44f00;
+}
+
 
 /** 
   *
@@ -71,8 +75,6 @@ div img {
     background-color: #2274a5;
     color: white;
 }
-
-#container-de-descricao>p {}
 
 #container-de-descricao>ol {
     padding: 15px 0px;
@@ -132,6 +134,10 @@ td button {
 
 #back-button:hover {
     background-color: #635a3d
+}
+
+#back-button:focus {
+    color: white;
 }
 
 img {
