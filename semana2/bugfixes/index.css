@@ -76,10 +76,12 @@ div img {
 }
 
 #container-para-comprar {
+    display: inline-block;
     background-color: #e7eb90;
 }
 
 #container-para-comprar>p {
+    display: block;
     color: #c44f00;
     padding: 100px 0;
     font-size: 60px;
@@ -113,7 +115,6 @@ td button {
     margin-top: 20px;
     height: 100px;
 }
-
 
 #back-button {
     background-color: white;
