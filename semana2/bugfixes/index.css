@@ -77,12 +77,18 @@ button:hover {
     color: white;
 }
 
+#container-de-descricao>p {
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+}
+
 #container-de-descricao>ol {
     padding: 15px 0px;
 }
 
 #container-para-comprar {
-    display: inline-block;
+    display: block;
     background-color: #e7eb90;
 }
 
@@ -148,3 +154,5 @@ td button {
 img {
     width: 80px;
 }
+
+tbody {}
