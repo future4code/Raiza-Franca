@@ -33,3 +33,74 @@
 //um loop para correr o array e caso seja o menor número guarda na variável
 // caso seja o maior número guarda na outra variável, por fim da console nas duas variáveis 
 // para ver o menor e maior número do array.
+
+
+
+//Exercícios de Lógica de Programação
+//1
+// for, while, for of
+
+//O while a seguir executará enquanto n for menor que três:
+
+//n = 0;
+//x = 0;
+//while (n < 3) {
+//  n++;
+//  x += n;
+//}
+
+//2
+
+//a)false
+//b)false
+//c)true
+//d)true
+//e) false 
+
+//3
+// Faltou definir o valor da variável quantidade de números pares e fazer o incremento no loop
+
+
+const quantidadeDeNumerosPares = 3
+let i = 0
+while (i <= quantidadeDeNumerosPares) {
+    i++
+    console.log(i * 2)
+}
+
+/*
+//4
+function trigonometria() {
+
+    let a = Number(prompt("digite a:"));
+    let b = Number(prompt("digite b:"));
+    let c = Number(prompt("digite c:"));
+
+    if (a === b && b === c) {
+        console.log("Equilátero")
+
+    } else if (a !== b && b !== c && c !== a) {
+        console.log("Escaleno")
+
+    } else {
+        console.log("Isósceles")
+    }
+}
+
+trigonometria()
+*/
+//5
+
+let meuArray = [98, 44]
+
+function maiorNumero(meuArray) {
+    let maior = 0
+    for (let i = 0; i < meuArray.length; i++) {
+        if (meuArray[i] > maior) {
+            maior = meuArray[i]
+        }
+
+    }
+    return maior
+}
+maiorNumero()
