@@ -90,17 +90,89 @@ function trigonometria() {
 trigonometria()
 */
 //5
+/*const sampleArray = [30, 15];
 
-let meuArray = [98, 44]
+function MaiorValor() {
 
-function maiorNumero(meuArray) {
-    let maior = 0
-    for (let i = 0; i < meuArray.length; i++) {
-        if (meuArray[i] > maior) {
-            maior = meuArray[i]
+    let max = sampleArray[0];
+    let min = sampleArray[0];
+
+    let resultado = max - min
+
+    for (let i = 1; i < sampleArray.length; i++) {
+
+
+
+        if (sampleArray[i] > max) {
+
+            max = sampleArray[i]
+        }
+        if (sampleArray[i] < min) {
+
+            min = sampleArray[i]
+        }
+        console.log(`O maior número é:${max}`)
+
+        if (max % min > 0) {
+
+            console.log(`${max} é divisivel por ${min}`)
+        }
+        if (min % max < 0) {
+
+            console.log(`${min} não é divisivel por ${max}`)
         }
 
+
+
     }
-    return maior
+
+    console.log(`A diferença entre eles é:${resultado} `)
 }
-maiorNumero()
+
+
+MaiorValor()*/
+
+
+
+//Exercícios de Funções
+//1
+
+let sampleArray = [469, 755, 244, 245, 758, 450, 302, 20, 712, 71, 456, 21, 398, 339, 882, 848, 179, 535, 940, 472];
+
+function doisMaioresNumeros() {
+
+    let max = sampleArray[0];
+    let max2 = sampleArray[0]
+
+
+    for (let i = 0; i < sampleArray.length; i++) {
+
+
+        if (sampleArray[i] > max) {
+            max = sampleArray[i]
+        }
+
+
+    }
+    for (let i = 0; i < sampleArray.length; i++) {
+
+
+        if ((sampleArray[i] > max) && (sampleArray[i] != max)) {
+            max2 = sampleArray[i];
+        }
+
+
+    }
+    console.log(max)
+    console.log(max2)
+
+}
+doisMaioresNumeros()
+
+//2
+
+const hello = function() {
+    const msg = "Hello Labenu!";
+    alert(msg)
+}
+hello()
