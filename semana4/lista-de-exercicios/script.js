@@ -176,3 +176,57 @@ const hello = function() {
     alert(msg)
 }
 hello()
+
+//Exercícios de Objetos
+//1
+//Array é uma lista de números, strings e outros e é usado para guardar mais de uma informação
+//Objetos é varias listas onde podemos guardar várias informações classificadas mais organizado.
+
+//2
+function criaRetangulo(lado1, lado2) {
+    const retangulo = {
+        largura: lado1,
+        altura: lado2,
+        perimetro: 2 * (lado1 + lado2),
+        area: lado1 * lado2,
+    }
+    console.log(`A Largura do retangulo é: ${retangulo.largura}`)
+    console.log(`A Altura do retangulo é: ${retangulo.altura}`)
+    console.log(`O perimetro do retangulo é: ${retangulo.perimetro}`)
+    console.log(`A área do retangulo é: ${retangulo.area}`)
+
+    return retangulo
+}
+
+criaRetangulo(20, 40)
+
+//3
+const filmeFavorito = {
+    titulo: "O Regresso",
+    ano: 2015,
+    diretor: "Alejandro González Iñárritu",
+    atores: ["Leonardo DiCaprio",
+        "Tom Hardy", "Domhnall Gleeson"
+    ]
+
+}
+console.log(`Venha assistir ao filme ${filmeFavorito.titulo}, de ${filmeFavorito.ano}, dirigido por ${filmeFavorito.diretor} e estrelado por ${filmeFavorito.atores[0]}, ${filmeFavorito.atores[2]}. `)
+
+//4
+const dadosPessoais = {
+    nome: "Viviane",
+    idade: 35,
+    email: " viviane@bol.com",
+    endereco: "rua curitiba nº 351, Vale do Paraiba, Maringa, São Paulo"
+}
+console.log(dadosPessoais)
+
+function anonimizarPessoa() {
+    dadosPessoais.nome = "ANÔNIMO"
+}
+anonimizarPessoa()
+
+
+console.log(dadosPessoais)
+
+//5
