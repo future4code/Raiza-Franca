@@ -17,22 +17,22 @@
 //fora da função é declarada duas variáveis que recebe a função, uma com os parâmentros 
 // caso seja ação o valor será 150
 // caso seja tesouro direto o valor será 200
-// no final imprimi as duas variáveis com os resultados 165 e alert "Tipo de investimento informado incorreto"
+// no final imprimi as duas variáveis com os resultados 165 e undefined porque tesouro direto não foi informado
 
 //3 
 // Foi declarado 3 arrays, um com os números e outros dois para guardar os números pares e impares
 // Um loop que corre o array de números, caso os números sejam pares enviar para o array1
 // caso os números sejam impares enviar para array2
-// ao final 3 consoles um para imprimir a quantidade de números do array números 
-// e os outros dois para imprimir quantos números pares há no array1
-// e quantos números impares há no array2
+// ao final 3 consoles um para imprimir a quantidade de números do array números que é 14
+// e os outros dois para imprimir quantos números pares há no array1 que é 6
+// e quantos números impares há no array2 que é 8
 
 //4
 //Um array populado com números positivos e negativos e duas variáveis foi criadas para armazenar 
 //o maior e o menor valor do array de números
 //um loop para correr o array e caso seja o menor número guarda na variável
 // caso seja o maior número guarda na outra variável, por fim da console nas duas variáveis 
-// para ver o menor e maior número do array.
+// para ver o menor e maior número do array, 1590 e -10 respectivamente
 
 
 
@@ -40,14 +40,23 @@
 //1
 // for, while, for of
 
-//O while a seguir executará enquanto n for menor que três:
+const dias = [01, 05, 25, 33, 45]
 
-//n = 0;
-//x = 0;
-//while (n < 3) {
-//  n++;
-//  x += n;
-//}
+for (let i = 0; i < dias.length; i++) {
+    console.log(dias[i])
+}
+
+let index = 0
+while (index < dias.length) {
+
+    console.log(dias[index])
+    index++
+}
+
+for (const index of dias) {
+    console.log(index)
+}
+
 
 //2
 
@@ -55,7 +64,7 @@
 //b)false
 //c)true
 //d)true
-//e) false 
+//e) true 
 
 //3
 // Faltou definir o valor da variável quantidade de números pares e fazer o incremento no loop
@@ -68,7 +77,7 @@ while (i <= quantidadeDeNumerosPares) {
     console.log(i * 2)
 }
 
-/*
+
 //4
 function trigonometria() {
 
@@ -88,49 +97,43 @@ function trigonometria() {
 }
 
 trigonometria()
-*/
+
 //5
-/*const sampleArray = [30, 15];
-
-function MaiorValor() {
-
-    let max = sampleArray[0];
-    let min = sampleArray[0];
-
-    let resultado = max - min
-
-    for (let i = 1; i < sampleArray.length; i++) {
 
 
+function MaiorValor(num1, num2) {
 
-        if (sampleArray[i] > max) {
-
-            max = sampleArray[i]
-        }
-        if (sampleArray[i] < min) {
-
-            min = sampleArray[i]
-        }
-        console.log(`O maior número é:${max}`)
-
-        if (max % min > 0) {
-
-            console.log(`${max} é divisivel por ${min}`)
-        }
-        if (min % max < 0) {
-
-            console.log(`${min} não é divisivel por ${max}`)
-        }
+    let max = 0
+    let min = 0;
 
 
+    if (num1 > num2) {
+
+        max = num1
+        min = num2
+    } else {
+        max = num2
+        min = num1
 
     }
+    console.log(`O maior número é:${max}`)
 
-    console.log(`A diferença entre eles é:${resultado} `)
+    if (min % max === 0) {
+        console.log(min.toString(), " é divisível por ", max.toString())
+    } else {
+        console.log(min.toString(), " não é divisível por ", max.toString())
+    }
+
+    if (min % max === 0) {
+        console.log(max.toString(), " é divisível por ", min.toString())
+    } else {
+        console.log(max.toString(), " não é divisível por ", min.toString())
+    }
+
+    console.log("A diferença entre eles é ", max - min)
 }
 
-
-MaiorValor()*/
+MaiorValor(50, 20)
 
 
 
@@ -141,30 +144,39 @@ let sampleArray = [469, 755, 244, 245, 758, 450, 302, 20, 712, 71, 456, 21, 398,
 
 function doisMaioresNumeros() {
 
-    let max = sampleArray[0];
+    let max = sampleArray[0]
+    let min = sampleArray[0]
     let max2 = sampleArray[0]
+    let min2 = sampleArray[0]
 
 
-    for (let i = 0; i < sampleArray.length; i++) {
+    for (let num of sampleArray) {
 
 
-        if (sampleArray[i] > max) {
-            max = sampleArray[i]
+        if (num > max) {
+            max = num
+        }
+        if (num < min) {
+            min = num
         }
 
 
     }
-    for (let i = 0; i < sampleArray.length; i++) {
+    for (let num of sampleArray) {
 
 
-        if ((sampleArray[i] > max) && (sampleArray[i] != max)) {
-            max2 = sampleArray[i];
+        if ((num > max2) && (num < max)) {
+            max2 = num;
+        }
+
+        if ((num < min2) && (num > min)) {
+            min2 = num;
         }
 
 
     }
-    console.log(max)
-    console.log(max2)
+    console.log(`O segundo maior número é: ${max2}`)
+    console.log(`O segundo menor número é: ${min2}`)
 
 }
 doisMaioresNumeros()
@@ -222,11 +234,168 @@ const dadosPessoais = {
 console.log(dadosPessoais)
 
 function anonimizarPessoa() {
-    dadosPessoais.nome = "ANÔNIMO"
+    return {
+        nome: "ANONIMO",
+        idade: dadosPessoais.idade,
+        email: dadosPessoais.email,
+        endereco: dadosPessoais.endereco
+    }
 }
-anonimizarPessoa()
+console.log(anonimizarPessoa(dadosPessoais))
 
 
-console.log(dadosPessoais)
 
-//5
+
+//Exercícios de Funções de array
+const dados = [
+    { nome: "Pedro", idade: 20 },
+    { nome: "João", idade: 10 },
+    { nome: "Paula", idade: 12 },
+    { nome: "Artur", idade: 89 }
+]
+
+//1 a)
+const maiores20 = dados.filter((dados) => {
+    return dados.idade >= 20
+})
+
+console.log(maiores20)
+
+//1 b)
+const menores20 = dados.filter((dados) => {
+    return dados.idade < 20
+})
+
+console.log(menores20)
+
+//2
+
+const array = [1, 2, 3, 4, 5, 6]
+
+//a)
+
+const multiplo2 = array.map((i) => {
+    return i * 2
+})
+
+console.log(multiplo2)
+
+//b)
+const multiplo3 = array.map((i) => {
+    const result = i * 2
+    return result.toString()
+})
+console.log(multiplo3)
+
+//c)
+
+const parImpar = array.map((i) => {
+    if (i % 2 === 0) {
+        return i + " é par"
+    } else {
+        return i + " é impar"
+    }
+
+})
+
+console.log(parImpar)
+
+//3
+
+const pessoas = [
+    { nome: "Paula", idade: 12, altura: 1.8 },
+    { nome: "João", idade: 20, altura: 1.3 },
+    { nome: "Pedro", idade: 15, altura: 1.9 },
+    { nome: "Luciano", idade: 22, altura: 1.8 },
+    { nome: "Artur", idade: 10, altura: 1.2 },
+    { nome: "Soter", idade: 70, altura: 1.9 }
+]
+
+const temPermissao = pessoas.filter((pessoas) => {
+
+    if (pessoas.altura >= 1.5 && pessoas.idade >= 14 && pessoas.idade <= 60)
+        return pessoas
+})
+
+console.log(temPermissao)
+
+const naoTemPermissao = pessoas.filter((pessoas) => {
+
+    if (pessoas.altura < 1.5 || pessoas.idade < 14 || pessoas.idade > 60)
+        return pessoas
+})
+
+console.log(naoTemPermissao)
+
+//4
+
+const consultas = [
+    { nome: "João", genero: "masculino", cancelada: true, dataDaConsulta: "01/10/2019" },
+    { nome: "Pedro", genero: "masculino", cancelada: false, dataDaConsulta: "02/10/2019" },
+    { nome: "Paula", genero: "feminino", cancelada: true, dataDaConsulta: "03/11/2019" },
+    { nome: "Márcia", genero: "feminino", cancelada: false, dataDaConsulta: "04/11/2019" }
+]
+
+const emails = consultas.map((consulta) => {
+    let emailFinal = "Olá, "
+
+    if (consulta.cancelada) {
+        if (consulta.genero === "feminino") {
+            emailFinal += "Sra. "
+        } else {
+            emailFinal += "Sr. "
+        }
+
+        emailFinal += consulta.nome + ". "
+
+        emailFinal += "Estamos enviando esta mensagem para "
+
+        if (consulta.genero === "feminino") {
+            emailFinal += "lembrá-la "
+        } else {
+            emailFinal += "lembrá-lo "
+        }
+
+        emailFinal += "da sua consulta no dia " + consulta.dataDaConsulta + ". "
+        emailFinal += "Por favor, acuse o recebimento deste-email."
+    } else {
+
+        if (consulta.genero === "feminino") {
+            emailFinal += "Sra. "
+        } else {
+            emailFinal += "Sr. "
+        }
+
+        emailFinal += consulta.nome + ". "
+
+        emailFinal += "Infelizmente sua consulta marcada para o dia "
+
+        emailFinal += consulta.dataDaConsulta + " foi cancelada. "
+        emailFinal += "Se quiser, pode entrar em contato conosco para remarcá-la."
+    }
+    return emailFinal
+})
+
+console.log(emails)
+    //5
+
+const contas = [
+    { cliente: "João", saldoTotal: 1000, compras: [100, 200, 300] },
+    { cliente: "Paula", saldoTotal: 7500, compras: [200, 1040] },
+    { cliente: "Pedro", saldoTotal: 10000, compras: [5140, 6100, 100, 2000] },
+    { cliente: "Luciano", saldoTotal: 100, compras: [100, 200, 1700] },
+    { cliente: "Artur", saldoTotal: 1800, compras: [200, 300] },
+    { cliente: "Soter", saldoTotal: 1200, compras: [] }
+]
+
+contas.forEach((contas) => {
+
+    let totalDeCompras = 0
+    contas.compras.forEach((valor) => {
+        totalDeCompras += valor
+    })
+
+    contas.saldoTotal -= totalDeCompras
+})
+
+console.log(contas)
