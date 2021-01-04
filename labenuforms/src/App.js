@@ -37,8 +37,9 @@ export default class App extends React.Component {
       <div className="App" >
 
         { renderizaEtapa()}
-        < button onClick={this.goToNextStep}> Próxima Etapa</button >
-
+        {this.state.step != 4 && (
+          < button onClick={this.goToNextStep}> Próxima Etapa</button >
+        )}
       </div >
     );
   }

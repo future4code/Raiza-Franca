@@ -10,10 +10,8 @@ export default class LastStep extends React.Component {
         return (
             <div>
                 <h3>ETAPA FINAL: O formulário acabou</h3>
-                <p>1. Muito Obrigado por participar! Entraremos em contato¹</p>
+                <p>1. Muito Obrigado por participar! Entraremos em contato</p>
                 
-
-
 
             </div>
         );
