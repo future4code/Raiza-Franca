@@ -1,19 +1,51 @@
 import React from 'react';
-import CreatePlaylist from './components/createPlaylist'
-import GetAllPlaylists from './components/getAllPlaylists'
-//import AddTrackToPlaylist from './components/addTrackToPlaylist'
+import styled from "styled-components";
+import Header from './components/Header';
+import PlaylistCreationPage from './components/PlaylistCreationPage';
+import PlaylistManagerPage from './components/PlaylistManagerPage';
+import img from './components/img/capa.png'
+import image from './components/img/ruido.png'
 
 
-export default class App extends React.Component{
-  render(){
-    return(
-      <div>
-        <h1>Labefy</h1>
-        <CreatePlaylist/>
-        <GetAllPlaylists/>
-      
-        
-      </div>
-    )
+
+const AppContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: url(${img}),url(${image});
+  
+`
+
+
+class App extends React.Component {
+  state = {
+    currentPage: "playlistCreationPage"
+  }
+
+  changePage = (currentPage) => {
+    this.setState({currentPage: currentPage})
+  }
+
+  render () {
+    const renderCurrentPage = () => {
+      if (this.state.currentPage === "playlistCreationPage") {
+        return <PlaylistCreationPage />
+      } else if (this.state.currentPage === "playlistManagerPage") {
+        return <PlaylistManagerPage />
+      }
+    }
+
+    return (
+      <AppContainer>
+       
+        <Header 
+          changePage={this.changePage}
+        />
+        {renderCurrentPage()}
+      </AppContainer>
+    );
   }
 }
+
+export default App;
