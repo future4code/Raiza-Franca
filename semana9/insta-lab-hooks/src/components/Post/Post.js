@@ -33,36 +33,22 @@ const Post = (props) => {
   };
 
   const enviarComentario = (comentario) => {
-    const listaDeComentarios = [...valorComentario, comentario]
+    const listaDeComentarios = comentarios;
+    listaDeComentarios.push(comentario)
     setComentarios(listaDeComentarios);
-    setValorComentario(false)
+    setComentarios(listaDeComentarios)
     setNumeroComentario(numeroComentarios + 1);
-    
+
 
   }
 
-  const iconeCurtida = () => {
-    setValorCurtida(valorCurtida ? (iconeCoracaoPreto) : (iconeCoracaoBranco))
-  }
-  const caixaDeComentario = () => {
-    setValorComentario(valorComentario)
-      return(
-        <SecaoComentario enviarComentario={enviarComentario}/>
-      )
-    
-        
-  }
+  const iconeCurtida = valorCurtida ? iconeCoracaoPreto : iconeCoracaoBranco
+  
 
-  {comentarios.map((comentario) => {
-
-      return (
-        <CommentContainer>
-          <p>{comentario}</p>
-        </CommentContainer>
-
-      )
-    })
-  }
+  const caixaDeComentario = comentarios ? (
+    <SecaoComentario enviarComentario={(comentario) => { enviarComentario(comentario) }} />
+  ):('');
+   
   return (
     <PostContainer>
       <PostHeader>
