@@ -1,14 +1,11 @@
 import React from 'react'
-import HomePage from './Pages/HomePage';
-import ApplicationFormPage from './Pages/ApplicationFormPage';
-import LoginPage from './Pages/LoginPage'
-import CreateTripPage from './Pages/CreateTripPage'
+import Router from '../src/routes/Route'
 
 function App() {
   return (
     <div>
      
-      <ApplicationFormPage/>
+      <Router/>
       
     </div>
   );

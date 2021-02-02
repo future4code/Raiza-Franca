@@ -1,0 +1,1 @@
+export const urlCreateTrip = 'https://us-central1-labenu-apis.cloudfunctions.net/labeX/:raiza-epps/trips'

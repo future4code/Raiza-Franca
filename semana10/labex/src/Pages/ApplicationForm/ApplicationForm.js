@@ -1,5 +1,5 @@
 import React from 'react'
-import {useInputApplicationForm} from '../hooks/useInputApplicationForm'
+import {useInputApplicationForm} from '../../hooks/useInputApplicationForm'
 
 function ApplicationFormPage() {
     const [nameApplicationForm, onChangenameApplicationForm] = useInputApplicationForm();

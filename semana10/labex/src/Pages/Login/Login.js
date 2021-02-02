@@ -1,6 +1,10 @@
 import React from 'react';
+import {goToCreateTrip} from '../../routes/Coordinator'
+import { useHistory } from "react-router-dom"; 
 
 function LoginPage() {
+
+    const history = useHistory();
     return (
         <div>
             <h1>LabeX</h1>
@@ -8,7 +12,7 @@ function LoginPage() {
             <p>Please enter your e-mail and password:</p>
             <input placeholder={'Email'}></input>
             <input placeholder={'Password'}></input>
-            <button>Login</button>
+            <button onClick={() => goToCreateTrip(history)}>Login</button>
            
         </div>
     );
