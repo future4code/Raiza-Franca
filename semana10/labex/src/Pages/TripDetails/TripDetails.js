@@ -6,6 +6,7 @@ export default function TripDetails() {
     <div>
      
      <h1>List Details</h1>
+     <button>voltar</button>
       
     </div>
   );
