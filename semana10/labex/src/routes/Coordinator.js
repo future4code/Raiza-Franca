@@ -22,4 +22,8 @@ export const goToTripDetails = (history) => {
     history.push("/trips/details");
 };
 
+export const goToLastPage =(history)=>{
+    history.goBack();
+}
+
 

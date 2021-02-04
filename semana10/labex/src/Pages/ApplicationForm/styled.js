@@ -4,7 +4,7 @@ export const ApplicationFormContainer =styled.div`
 
 display:flex;
 flex-direction:column;
-margin-top:50px;
+margin-top:10px;
 justify-content:center;
 align-items:center;
 `
@@ -33,4 +33,10 @@ color:white;
 color:black; 
 }
 
+`
+export const SelectApplicationForm = styled.select`
+
+width:350px;
+height:35px;
+margin:10px;
 `

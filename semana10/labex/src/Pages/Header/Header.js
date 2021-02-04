@@ -9,10 +9,11 @@ export default function Header() {
   const history = useHistory();
   return (
     <HeaderContainer>
+     
 
       <ButtonHeader onClick={() => goToHome(history)}>Home</ButtonHeader>
-    
-    
+
+
 
     </HeaderContainer>
   );

@@ -1,78 +1,109 @@
-import React, { useState } from 'react';
+import React,{useState} from 'react';
 import axios from 'axios';
-import { ApplyUrl } from '../../axios/axiosConfig'
-import { ApplicationFormContainer, InputApplicationForm, TextAreaApplicationForm, ButtonApplicationForm } from '../ApplicationForm/styled'
+import { baseUrl } from '../../axios/axiosConfig';
+import useForm from '../../hooks/useForm'
+import { useParams } from "react-router-dom";
+import { ApplicationFormContainer, InputApplicationForm, TextAreaApplicationForm, SelectApplicationForm, ButtonApplicationForm } from '../ApplicationForm/styled'
 
 function ApplicationFormPage() {
 
-    const [name, setName] = useState('');
-    const [age, setAge] = useState(0);
-    const [textApplication, setText] = useState('');
-    const [profession, setProfession] = useState('');
-    const [country, setCountry] = useState('')
+    const params = useParams();
+    const [trips, setTrips] = useState()
+    const [form, onChange, clear] = useForm({ name: "", age: "", applicationText: "", profession: "", country: "" });
 
+    const getTrips = () => {
+        axios.get(baseUrl)
+            .then((res) => {
+                setTrips(res.data.trips)
+            }).catch((err) => {
 
-    const onChangeName = (event) => {
-        setName(event.target.value);
-    };
-    const onChangeAge = (event) => {
-        setAge(event.target.value);
-    };
-    const onChangeText = (event) => {
-        setText(event.target.value);
-    };
-    const onChangeProfession = (event) => {
-        setProfession(event.target.value);
-    };
-    const onChangeCountry = (event) => {
-        setCountry(event.target.value);
-    };
+            })
+    }
 
-    const ApplytoTrip = () => {
-        const body = {
-            name: name,
-            age: age,
-            applicationText: textApplication,
-            profession: profession,
-            country: country
-        }
-        axios.post(ApplyUrl, body)
+    const ApplytoTrip = (event) => {
+
+        event.preventDefault();
+        clear()
+
+        axios.post(`${baseUrl}${params.id}/apply`, form)
+            .then((res) => {
+                alert('Sua inscrição foi realizada com sucesso')
+            }).catch((err) => {
+                console.log(err)
+            })
     }
 
     return (
         <ApplicationFormContainer>
             <h2>Application Form</h2>
-            <InputApplicationForm
-                value={name}
-                onChange={onChangeName}
-                placeholder={'Name'}>
-            </InputApplicationForm>
+            <form onSubmit={ApplytoTrip}>
+                <InputApplicationForm
+                    name='name'
+                    value={form.name}
+                    onChange={onChange}
+                    required
+                    pattern={"^.{3,}"}
+                    title={"O nome deve ter no mínimo 3 caracteres"}
+                    placeholder={'Name'}>
+                </InputApplicationForm>
 
-            <InputApplicationForm
-                type={'number'}
-                value={age}
-                onChange={onChangeAge}
-                placeholder={'age'}>
-            </InputApplicationForm>
+                <InputApplicationForm
+                    name='age'
+                    type={'number'}
+                    value={form.age}
+                    min={18}
+                    onChange={onChange}
+                    placeholder={'age'}>
+                </InputApplicationForm>
 
-            <TextAreaApplicationForm
-                value={textApplication}
-                onChange={onChangeText}
-                placeholder={'application Text'}>
-            </TextAreaApplicationForm>
+                <TextAreaApplicationForm
+                    name='textApplication'
+                    value={form.textApplication}
+                    required
+                    pattern={"^.{30,}"}
+                    title={"O nome deve ter no mínimo 30 caracteres"}
+                    onChange={onChange}
+                    placeholder={'application Text'}>
+                </TextAreaApplicationForm>
 
-            <TextAreaApplicationForm
-                value={profession}
-                onChange={onChangeProfession}
-                placeholder={'profession'}>
-            </TextAreaApplicationForm>
+                <InputApplicationForm
+                    name='profession'
+                    value={form.profession}
+                    onChange={onChange}
+                    required
+                    pattern={"^.{10,}"}
+                    title={"O nome deve ter no mínimo 10 caracteres"}
+                    placeholder={'profession'}>
+                </InputApplicationForm>
 
-            <InputApplicationForm
-                value={country}
-                onChange={onChangeCountry}
-                placeholder={'country'}>
-            </InputApplicationForm>
-            <ButtonApplicationForm>Aplicar</ButtonApplicationForm>
+                <SelectApplicationForm
+                    name='country'
+                    value={form.country}
+                    onChange={onChange}
+                    placeholder={'country'}>
+                    <option value={'selecione'}>Selecione</option>
+                    <option value={'Brasil'}>Brasil</option>
+                    <option value={'Argentina'}>Argentina</option>
+                    <option value={'EUA'}>EUA</option>
+                    <option value={'França'}>França</option>
+                    <option value={'Alemanha'}>Alemanha</option>
+                    <option value={'Grecia'}>Grécia</option>
+                    <option value={'Amesterdam'}>Amesterdam</option>
+                    <option value={'italia'}>Itália</option>
+                    <option value={'Malta'}>Malta</option>
+                    <option value={'China'}>China</option>
+                </SelectApplicationForm >
+                <SelectApplicationForm>
+                    {trips.map((trip) => {
+                        return (
+                            <option>{trip.name}</option>
+                        )
+                    })}
+                    <option value={'selecione'}>Selecione</option>
+                    <option >Nome da viagem - planeta</option>
+                </SelectApplicationForm >
+                <ButtonApplicationForm>Aplicar</ButtonApplicationForm>
+            </form>
         </ApplicationFormContainer>
     );
 }

@@ -32,7 +32,7 @@ export default function Router() {
                         <CreateTrip />
                     </Route>
 
-                    <Route exact path="/trips/list">
+                    <Route exact path="/trips/list/">
                         <ListTrips />
                     </Route>
 
