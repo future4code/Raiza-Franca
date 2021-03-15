@@ -8,6 +8,15 @@ margin-top:10px;
 justify-content:center;
 align-items:center;
 `
+
+export const FormApplication =styled.form`
+
+display:flex;
+flex-direction:column;
+margin-top:10px;
+justify-content:center;
+align-items:center;
+`
 export const InputApplicationForm = styled.input`
 
 width:350px;

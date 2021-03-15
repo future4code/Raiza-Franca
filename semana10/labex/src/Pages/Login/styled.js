@@ -11,6 +11,15 @@ align-items:center;
 text-align:center;
 
 `
+export const FormLogin =styled.form`
+
+display:flex;
+margin-top:50px;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+`
 export const InputLogin = styled.input`
 
 width:350px;

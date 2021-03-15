@@ -1,45 +1,65 @@
-import React,{useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { baseUrl } from '../../axios/axiosConfig';
 import useForm from '../../hooks/useForm'
-import { useParams } from "react-router-dom";
-import { ApplicationFormContainer, InputApplicationForm, TextAreaApplicationForm, SelectApplicationForm, ButtonApplicationForm } from '../ApplicationForm/styled'
+import { ApplicationFormContainer, FormApplication, InputApplicationForm, TextAreaApplicationForm, SelectApplicationForm, ButtonApplicationForm } from '../ApplicationForm/styled'
 
 function ApplicationFormPage() {
 
-    const params = useParams();
-    const [trips, setTrips] = useState()
-    const [form, onChange, clear] = useForm({ name: "", age: "", applicationText: "", profession: "", country: "" });
 
-    const getTrips = () => {
+    const [trips, setTrips] = useState([])
+    const [form, onChange, clear] = useForm({
+        name: "",
+        age: 0,
+        applicationText: "",
+        profession: "",
+        country: "",
+        trip: null
+    });
+
+
+
+    useEffect(() => {
         axios.get(baseUrl)
             .then((res) => {
                 setTrips(res.data.trips)
-            }).catch((err) => {
-
+                
             })
-    }
+
+
+    }, [baseUrl])
 
     const ApplytoTrip = (event) => {
 
         event.preventDefault();
+
+      const body={
+        name: form.name,
+        age: form.age,
+        applicationText: form.applicationText,
+        profession: form.profession,
+        country: form.country
+      }
+
         clear()
 
-        axios.post(`${baseUrl}${params.id}/apply`, form)
-            .then((res) => {
-                alert('Sua inscrição foi realizada com sucesso')
-            }).catch((err) => {
-                console.log(err)
-            })
+
+        axios.post(`${baseUrl}/${form.trip.id}/apply`, body)
+        .then((res)=>[
+            console.log('Aplicação realizada com sucesso')
+        ]).catch((err)=>{
+            console.log(err)
+        })
     }
+           
 
     return (
-        <ApplicationFormContainer>
+        <ApplicationFormContainer >
             <h2>Application Form</h2>
-            <form onSubmit={ApplytoTrip}>
+            <FormApplication onSubmit={ApplytoTrip}>
                 <InputApplicationForm
-                    name='name'
-                    value={form.name}
+                    name={'name'}
+                    value={form['name']}
                     onChange={onChange}
                     required
                     pattern={"^.{3,}"}
@@ -48,17 +68,17 @@ function ApplicationFormPage() {
                 </InputApplicationForm>
 
                 <InputApplicationForm
-                    name='age'
+                    name={'age'}
                     type={'number'}
-                    value={form.age}
+                    value={form['age']}
                     min={18}
                     onChange={onChange}
                     placeholder={'age'}>
                 </InputApplicationForm>
 
                 <TextAreaApplicationForm
-                    name='textApplication'
-                    value={form.textApplication}
+                    name={'textApplication'}
+                    value={form['textApplication']}
                     required
                     pattern={"^.{30,}"}
                     title={"O nome deve ter no mínimo 30 caracteres"}
@@ -67,8 +87,8 @@ function ApplicationFormPage() {
                 </TextAreaApplicationForm>
 
                 <InputApplicationForm
-                    name='profession'
-                    value={form.profession}
+                    name={'profession'}
+                    value={form['profession']}
                     onChange={onChange}
                     required
                     pattern={"^.{10,}"}
@@ -77,10 +97,11 @@ function ApplicationFormPage() {
                 </InputApplicationForm>
 
                 <SelectApplicationForm
-                    name='country'
-                    value={form.country}
+                    name={'country'}
+                    value={form['country']}
                     onChange={onChange}
-                    placeholder={'country'}>
+                    placeholder={'country'}
+                    required>
                     <option value={'selecione'}>Selecione</option>
                     <option value={'Brasil'}>Brasil</option>
                     <option value={'Argentina'}>Argentina</option>
@@ -93,17 +114,18 @@ function ApplicationFormPage() {
                     <option value={'Malta'}>Malta</option>
                     <option value={'China'}>China</option>
                 </SelectApplicationForm >
-                <SelectApplicationForm>
+                <SelectApplicationForm
+                     labelId="select-viagens"
+                     onChange={onChange}
+                     value={form['trip']}
+                     name={'trip'}>
                     {trips.map((trip) => {
-                        return (
-                            <option>{trip.name}</option>
-                        )
-                    })}
-                    <option value={'selecione'}>Selecione</option>
-                    <option >Nome da viagem - planeta</option>
+            return <option value={trip}>{trip.name}</option>
+          })}
+
                 </SelectApplicationForm >
-                <ButtonApplicationForm>Aplicar</ButtonApplicationForm>
-            </form>
+                <ButtonApplicationForm type={'submit'}>Aplicar</ButtonApplicationForm>
+            </FormApplication>
         </ApplicationFormContainer>
     );
 }

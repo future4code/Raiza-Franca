@@ -36,7 +36,7 @@ export default function Router() {
                         <ListTrips />
                     </Route>
 
-                    <Route exact path="/trips/details">
+                    <Route exact path="/trips/details/:id">
                         <TripDetails />
                     </Route>
                 </Switch>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ListTripContainer, Title, ButtonListTrip, NameListTrip } from '../ListTrips/styled'
-import { goToCreateTrip, goToApplicationForm, goToTripDetails } from '../../routes/Coordinator';
+import { goToCreateTrip, goToTripDetails } from '../../routes/Coordinator';
 import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import { baseUrl } from '../../axios/axiosConfig';
@@ -37,10 +37,10 @@ export default function ListTrips() {
       {trips.map((trip) => {
         return (
           <ListTripContainer>
-            <NameListTrip onClick={() => goToTripDetails(history)}>{trip.name}</NameListTrip>
-            <p>{trip.id}</p>
+            <NameListTrip onClick={() => goToTripDetails(history, trip.id)}>{trip.name}</NameListTrip>
+           
 
-            <ButtonListTrip onClick={() => goToApplicationForm(history)}>Inscreva-se</ButtonListTrip>
+           
 
           </ListTripContainer>
 

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { loginUrl } from '../../axios/axiosConfig';
 import useForm from '../../hooks/useForm';
 import { useHistory } from "react-router-dom";
-import { LoginContainer, InputLogin, ButtonLogin } from '../Login/styled'
+import { LoginContainer,FormLogin, InputLogin, ButtonLogin } from '../Login/styled'
 
 export default function LoginPage() {
 
@@ -42,7 +42,7 @@ export default function LoginPage() {
 
             <h2>LOGIN</h2>
             <p>Please enter your e-mail and password:</p>
-            <form onSubmit={login}>
+            <FormLogin onSubmit={login}>
                 <InputLogin
                     name='email'
                     value={form.email}
@@ -59,7 +59,7 @@ export default function LoginPage() {
                     placeholder={'Password'}>
                 </InputLogin>
                 <ButtonLogin>Login</ButtonLogin>
-            </form>
+            </FormLogin>
 
             
 

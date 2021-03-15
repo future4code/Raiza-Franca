@@ -1,14 +1,15 @@
 import React from 'react';
 import axios from 'axios';
 import useForm from '../../hooks/useForm';
+import {useProtectedPage} from '../../hooks/useProtectedPage'
 import { baseUrl } from '../../axios/axiosConfig';
-import { CreateTripContainer, InputCreateTrip, SelectCreateTrip, TextAreaCreateTrip, ButtonCreateTrip } from '../CreateTrip/styled'
+import { CreateTripContainer, FormCreateTrip, InputCreateTrip, SelectCreateTrip, TextAreaCreateTrip, ButtonCreateTrip } from '../CreateTrip/styled'
 
 export default function CreateTripPage() {
 
     const [form, onChange, clear] = useForm({ name: "", planet: "", date: "", description: "", durationInDays: "" });
 
-
+    useProtectedPage();
 
 
     const CreateTrip = (event) => {
@@ -21,7 +22,8 @@ export default function CreateTripPage() {
             }
         })
             .then((res) => {
-
+                
+               
                 alert('viagem criada com sucesso')
 
             })
@@ -35,7 +37,7 @@ export default function CreateTripPage() {
         <CreateTripContainer>
 
             <h2>Create Trip</h2>
-            <form onSubmit={CreateTrip}>
+            <FormCreateTrip onSubmit={CreateTrip}>
 
                 <InputCreateTrip
                     name='name'
@@ -70,7 +72,7 @@ export default function CreateTripPage() {
                     onChange={onChange}
                     type={'date'}
                     placeholder={'Date'}
-                    max={new Date()}
+                    min={'2021-01-01'}
                     pattern={"^.{5,}"}
                     title={"O nome deve ter no mínimo 5 caracteres"}
                     required>
@@ -96,7 +98,7 @@ export default function CreateTripPage() {
                     required>
                 </InputCreateTrip>
                 <ButtonCreateTrip>Criar</ButtonCreateTrip>
-            </form>
+            </FormCreateTrip>
 
         </CreateTripContainer>
     );

@@ -7,6 +7,13 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 `
+export const FormCreateTrip =styled.form`
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+`
 export const InputCreateTrip = styled.input`
 
 width:350px;
