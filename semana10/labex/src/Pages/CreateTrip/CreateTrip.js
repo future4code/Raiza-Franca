@@ -1,38 +1,30 @@
-import React,{useState, useEffect} from 'react';
-import axios from 'axios'
-import { useCreateTrip } from '../../hooks/useCreateTrip'
-import {goToListTrip} from '../../routes/Coordinator'
-import { useHistory } from "react-router-dom"; 
-import {urlCreateTrip} from '../../axios/axiosConfig'
+import React from 'react';
+import axios from 'axios';
+import useForm from '../../hooks/useForm';
+import {useProtectedPage} from '../../hooks/useProtectedPage'
+import { baseUrl } from '../../axios/axiosConfig';
+import { CreateTripContainer, FormCreateTrip, InputCreateTrip, SelectCreateTrip, TextAreaCreateTrip, ButtonCreateTrip } from '../CreateTrip/styled'
 
-export default function CreateTrip() {
-    
-    
+export default function CreateTripPage() {
 
-    const [nameCreateTrip, onchangeNameCreateTrip] = useCreateTrip()
-    const [planetCreateTrip, onchangePlanetCreateTrip] = useCreateTrip()
-    const [dateCreateTrip, onchangeDateCreateTrip] = useCreateTrip()
-    const [descriptionCreateTrip, onchangeDescriptionCreateTrip] = useCreateTrip()
-    const [durationInDaysCreateTrip, onchangeDurationInDaysCreateTrip] = useCreateTrip()
+    const [form, onChange, clear] = useForm({ name: "", planet: "", date: "", description: "", durationInDays: "" });
 
-    const history = useHistory();
+    useProtectedPage();
 
-    useEffect(() => {
-        CreateTrip()
-    }, [])
 
-    const CreateTrip = () => {
-        const body = {
-            name: nameCreateTrip,
-            planet: planetCreateTrip,
-            date: dateCreateTrip,
-            description: descriptionCreateTrip,
-            durationInDays: durationInDaysCreateTrip
-        }
-        axios.post(urlCreateTrip, body)
+    const CreateTrip = (event) => {
+
+        event.preventDefault();
+        clear()
+        axios.post(baseUrl, form, {
+            headers: {
+                auth: localStorage.getItem("token")
+            }
+        })
             .then((res) => {
                 
-                console.log(res.data.trip)
+               
+                alert('viagem criada com sucesso')
 
             })
             .catch((err) => {
@@ -40,44 +32,75 @@ export default function CreateTrip() {
             })
     }
 
+
     return (
-        <div>
-            <h1>LabeX</h1>
-            <h2>CreateTripPage</h2>
+        <CreateTripContainer>
 
-            <input
-                name={nameCreateTrip}
-                onChange={onchangeNameCreateTrip}
-                placeholder={'name of trip'}>
-            </input>
+            <h2>Create Trip</h2>
+            <FormCreateTrip onSubmit={CreateTrip}>
 
-            <input
-                name={planetCreateTrip}
-                onChange={onchangePlanetCreateTrip}
-                placeholder={'planet'}>
-            </input>
+                <InputCreateTrip
+                    name='name'
+                    value={form.name}
+                    onChange={onChange}
+                    placeholder={'Name Of Trip'}>
+                </InputCreateTrip>
 
-            <input
-                name={dateCreateTrip}
-                onChange={onchangeDateCreateTrip}
-                type={'date'}
-                placeholder={'date'}>
-            </input>
+                <SelectCreateTrip
+                    name='planet'
+                    value={form.planet}
+                    onChange={onChange}>
+                    <option value={'selecione'}>Selecione</option>
+                    <option value={'terra'}>Terra</option>
+                    <option value={'saturno'}>Saturno</option>
+                    <option value={'mercurio'}>Mercúrio</option>
+                    <option value={'marte'}>Marte</option>
+                    <option value={'plutao'}>Plutão</option>
+                    <option value={'venus'}>Vênus</option>
+                    <option value={'urano'}>Urano</option>
+                    <option value={'neturno'}>Neturno</option>
+                    <option value={'jupiter'}>Jupiter</option>
+                    <option value={'urano'}>Urano</option>
 
-            <textarea
-                name={descriptionCreateTrip}
-                onChange={onchangeDescriptionCreateTrip}
-                placeholder={'description'}>
-            </textarea>
 
-            <input
-                name={durationInDaysCreateTrip}
-                onChange={onchangeDurationInDaysCreateTrip}
-                placeholder={'durationInDays'}>
-            </input>
-            <button onClick={() => goToListTrip(history)}>Criar</button>
 
-        </div>
+                </SelectCreateTrip>
+
+                <InputCreateTrip
+                    name='date'
+                    value={form.date}
+                    onChange={onChange}
+                    type={'date'}
+                    placeholder={'Date'}
+                    min={'2021-01-01'}
+                    pattern={"^.{5,}"}
+                    title={"O nome deve ter no mínimo 5 caracteres"}
+                    required>
+                </InputCreateTrip>
+
+                <TextAreaCreateTrip
+                    name='description'
+                    value={form.description}
+                    onChange={onChange}
+                    placeholder={'Description'}
+                    pattern={"^.{30,}"}
+                    title={"O nome deve ter no mínimo 30 caracteres"}
+                    required>
+                </TextAreaCreateTrip>
+
+                <InputCreateTrip
+                    name='durationInDays'
+                    type={'number'}
+                    min={50}
+                    value={form.durationInDays}
+                    onChange={onChange}
+                    placeholder={'Duration In Days'}
+                    required>
+                </InputCreateTrip>
+                <ButtonCreateTrip>Criar</ButtonCreateTrip>
+            </FormCreateTrip>
+
+        </CreateTripContainer>
     );
 }
 
